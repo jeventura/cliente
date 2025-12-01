@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RuPaul Word Search</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <header class="game-header">
+      <h1>RuPaul Word Search</h1>
+      <p>Find the hidden words in the grid: RUPAUL, WERK, HELLO</p>
+    </header>
+
+    <main class="game-layout">
+      <section class="grid-section">
+        <div id="word-grid" class="grid"></div>
+      </section>
+
+      <section class="sidebar">
+        <p class="timer-text">
+          Time Left: <span id="time-left">60</span> sec
+        </p>
+
+        <p class="status" id="status-text">
+          Click a letter to start, then click another letter in a straight line (horizontal, vertical or diagonal).
+        </p>
+
+        <div class="buttons-row">
+          <button id="exit-btn" class="exit-btn">Exit</button>
+          <button id="reset-btn" class="reset-btn">Reset Puzzle</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/words.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
