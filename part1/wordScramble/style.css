@@ -1,0 +1,380 @@
+/* =======================
+   FUENTES LOCALES
+   ======================= */
+
+/* Avenir Next Rounded Regular */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-Reg.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Italic */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-Italic.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Demi (usaremos como 500 / medium) */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-Demi.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Demi Italic (500 italic) */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-DemiIt.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Bold */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Bold Italic */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-BoldIt.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Medium Italic (por si la quieres usar en textos) */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../generalAssets/fonts/AvenirNextRoundedStd-MedIt.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Broadway Regular (para títulos) */
+@font-face {
+  font-family: "Broadway";
+  src: url("../../generalAssets/fonts/Broadway Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Broadway Italic */
+@font-face {
+  font-family: "Broadway";
+  src: url("../../generalAssets/fonts/Broadway Italic.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* =======================
+   RESET Y BASE
+   ======================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "AvenirNextRounded", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Fondo base (desktop por defecto) */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Color de fondo base por si la imagen tarda en cargar */
+  background-color: #293993; /* RGB(41,57,147) */
+  background-image: url("../../generalAssets/img/backgroundDesktop.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 1rem;
+}
+
+/* Contenedor principal */
+.wrapper {
+  width: 100%;
+  max-width: 960px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  border: 2px solid #e10098; /* rosa #E10098 */
+  color: #fff;
+  padding: 18px 20px 22px;
+}
+
+/* =======================
+   HEADER
+   ======================= */
+
+.game-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.game-header h1 {
+  font-size: 1.8rem;
+  color: #ff8000; /* naranja #FF8000 */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-family: "Broadway", "AvenirNextRounded", sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.game-header p {
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+/* =======================
+   LAYOUT PRINCIPAL
+   ======================= */
+
+.game-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 2fr 1fr;
+  align-items: flex-start;
+}
+
+/* Grid de sopa de letras */
+.grid-section {
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(26px, 34px));
+  gap: 4px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Cada celda */
+.grid-cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.15s background-color, 0.15s border-color, 0.15s transform;
+  user-select: none;
+}
+
+/* Hover general */
+.grid-cell:hover {
+  border-color: #ff8000; /* naranja */
+  transform: translateY(-1px);
+}
+
+/* Celda seleccionada (inicio/fin) */
+.grid-cell.selected {
+  background: rgba(225, 0, 152, 0.6); /* rosa translúcido */
+  border-color: #e10098;
+}
+
+/* Celda de palabra encontrada */
+.grid-cell.found {
+  background: linear-gradient(
+    135deg,
+    rgba(225, 0, 152, 0.9),
+    rgba(187, 41, 187, 0.9)
+  ); /* rosa -> morado #BB29BB */
+  border-color: #ffffff;
+}
+
+/* =======================
+   SIDEBAR
+   ======================= */
+
+.sidebar {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Timer */
+.timer-text {
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.timer-text span {
+  font-weight: 600;
+  color: #ff8000;
+}
+
+/* Texto de estado */
+.status {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  min-height: 34px;
+}
+
+/* =======================
+   BOTONES
+   ======================= */
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.reset-btn,
+.exit-btn {
+  flex: 1; /* mismo ancho */
+  padding: 8px 0;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transition: 0.15s background-color, 0.15s transform, 0.15s border-color;
+}
+
+/* Reset: botón lleno */
+.reset-btn {
+  background: #e10098; /* rosa */
+  color: #fff;
+}
+
+.reset-btn:hover {
+  background: #ff8000; /* naranja */
+}
+
+.reset-btn:active {
+  transform: scale(0.97);
+}
+
+/* Exit: estilo outline pero mismo tamaño */
+.exit-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #e10098;
+}
+
+.exit-btn:hover {
+  background: rgba(225, 0, 152, 0.3);
+  border-color: #ff8000;
+}
+
+.exit-btn:active {
+  transform: scale(0.97);
+}
+
+/* =======================
+   RESPONSIVE
+   ======================= */
+
+/* Móvil ~390x844 */
+@media (max-width: 480px) {
+  /* Fondo específico para móvil */
+  body {
+    background-color: #293993;
+    /* OJO: revisa el nombre del archivo. Si realmente se llama backgorundMobile.png,
+       cambia el nombre aquí o en tu carpeta. */
+    background-image: url("../../generalAssets/img/backgroundMobile.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .wrapper {
+    padding: 14px 12px 16px;
+  }
+
+  .game-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .game-header p {
+    font-size: 0.9rem;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(10, minmax(22px, 26px));
+    padding: 10px;
+  }
+
+  .grid-cell {
+    font-size: 0.85rem;
+  }
+
+  .sidebar {
+    margin-top: 6px;
+  }
+}
+
+/* Tablet ~1024x768 */
+@media (min-width: 481px) and (max-width: 1023px) {
+  /* Fondo específico para tablet */
+  body {
+    background-color: #293993;
+    background-image: url("../../generalAssets/img/backgroundTablet.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .wrapper {
+    max-width: 900px;
+    padding: 18px 18px 22px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(10, minmax(28px, 34px));
+  }
+}
+
+/* Desktop ~1024+ */
+@media (min-width: 1024px) {
+  /* Fondo desktop (por si quieres reforzarlo aquí) */
+  body {
+    background-color: #293993;
+    background-image: url("../../generalAssets/img/backgroundDesktop.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .wrapper {
+    max-width: 980px;
+  }
+}

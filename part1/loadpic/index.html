@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo challenge</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>Photoshoot</h1>
+
+    <!-- Contenedor donde se verá la imagen subida -->
+    <div class="upload-wrapper">
+      <div class="upload-placeholder" id="uploadPlaceholder">
+        <p>You’ve arrived, henny! Sissy that Werk Room entrance and snap a pic hitting your fiercest pose. First impressions are everything.</p>
+      </div>
+      <canvas id="photoCanvas"></canvas>
+    </div>
+
+    <!-- Controles -->
+    <div class="controls">
+      <button id="uploadPhotoBtn">Upload picture</button>
+      <!-- input oculto para abrir el prompt de archivos -->
+      <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+        style="display: none;"
+      />
+    </div>
+
+    <div class="preview">
+      <h2>Preview</h2>
+      <p class="preview-hint">
+        your image will be shown in here once uploaded
+      </p>
+    </div>
+
+    <div id="errorMsg" class="error-message"></div>
+  </div>
+
+  <!-- JS principal -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

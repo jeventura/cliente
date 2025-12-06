@@ -1,0 +1,240 @@
+/* ==========================
+   1. Declaración de fuentes
+   ========================== */
+
+/* Avenir Next Rounded Regular */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-Reg.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Italic */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-Italic.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Demi (medium ~500-600) */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-Demi.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Demi Italic */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-DemiIt.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Bold */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Avenir Next Rounded Bold Italic */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-BoldIt.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Avenir Next Rounded Medium Italic (opcional para textos especiales) */
+@font-face {
+  font-family: "AvenirNextRounded";
+  src: url("../../../../generalAssets/fonts/AvenirNextRoundedStd-MedIt.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Broadway Regular */
+@font-face {
+  font-family: "Broadway";
+  src: url("../../../../generalAssets/fonts/Broadway Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Broadway Italic */
+@font-face {
+  font-family: "Broadway";
+  src: url("../../../../generalAssets/fonts/Broadway Italic.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ==========================
+   2. Estilos base
+   ========================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "AvenirNextRounded", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* Fondo oficial mobile */
+  background-color: #293993; /* azul de la paleta */
+  background-image: url("../../../../generalAssets/img/backgroundMobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+h1 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "Broadway", "AvenirNextRounded", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff8000; /* naranja de la paleta */
+}
+
+.app-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ==========================
+   3. Área de upload / preview
+   ========================== */
+
+.upload-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* igual que antes, formato retrato */
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #e10098; /* rosa de la paleta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mensaje que se muestra antes de que haya imagen */
+.upload-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.upload-placeholder p {
+  margin: 0;
+  font-family: "AvenirNextRounded", sans-serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #f5f5f5;
+}
+
+#photoCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================
+   4. Controles y botones
+   ========================== */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.95rem;
+  font-family: "AvenirNextRounded", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  background: #e10098; /* rosa */
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease,
+    background-color 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #ff8000; /* naranja al hover */
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================
+   5. Preview y mensajes
+   ========================== */
+
+.preview {
+  margin-top: 1.5rem;
+}
+
+.preview h2 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  font-family: "Broadway", "AvenirNextRounded", sans-serif;
+  font-style: italic;
+  color: #ff8000;
+}
+
+.preview-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  font-family: "AvenirNextRounded", sans-serif;
+}
+
+.error-message {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #ffb3b3;
+  font-family: "AvenirNextRounded", sans-serif;
+}
