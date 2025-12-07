@@ -1,8 +1,11 @@
+import {registerPlayerService} from './services.js'
+
 // ====== CONFIGURACIÓN DE GRID ======
 const GRID_SIZE = 10;
 const gridElement = document.getElementById("word-grid");
 const statusText = document.getElementById("status-text");
 const resetBtn = document.getElementById("reset-btn");
+const pruebaBtn = document.getElementById("prueba-btn");
 const exitBtn = document.getElementById("exit-btn");
 const timeLeftSpan = document.getElementById("time-left");
 
@@ -255,6 +258,15 @@ function clearSelection() {
   selectedEnd = null;
   cells.forEach(c => c.classList.remove("selected"));
 }
+
+//btn prueba: 
+
+
+pruebaBtn.addEventListener("click", () => {
+  console.log('aaa');
+  
+  registerPlayerService('Carlos','Paz','CPaz96','algooo@gmail.com')
+});
 
 // Botón reset: nueva sopa y reiniciar timer
 resetBtn.addEventListener("click", () => {

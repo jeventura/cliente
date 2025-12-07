@@ -15,7 +15,7 @@ import { httpClient } from './httpClient.js';
 export async function registerPlayerService(nombre, apellido, apodo, correo) {
     const body = { nombre, apellido, apodo, correo };
     return await httpClient(
-        '/auth/register',
+        '/api/auth/register',
         'POST',
         body
     );
@@ -30,7 +30,7 @@ export async function registerPlayerService(nombre, apellido, apodo, correo) {
 export async function createGroupService(nombre_grupo) {
     const body = { nombre_grupo: nombre_grupo};
     return await httpClient(
-        '/groups/create', // Ruta asumida para la creación de Grupos
+        '/api/groups/create', // Ruta asumida para la creación de Grupos
         'POST',
         body
     );
@@ -50,7 +50,7 @@ export async function joinGroupService(codigo_vinculacion) {
         'POST',
         body
     );
-
+}
 /**
  * [ENDPOINT 3] Marca un juego como completado y actualiza el puntaje.
  * @param {string} codigo_juego - Código del juego completado.
@@ -59,6 +59,7 @@ export async function joinGroupService(codigo_vinculacion) {
  * @param {string} [img=null] - Imagen Base64 opcional de la evidencia.
  * @returns {Promise<object>} El puntaje actual del jugador.
  */
+
 export async function completeGameService(codigo_juego, tiempo_jugado, flag_ganado, img = null) {
     const body = {
         codigo_juego,
