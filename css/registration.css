@@ -1,0 +1,302 @@
+/* Fuentes personalizadas */
+/* Ajusta las extensiones según tus archivos reales en /generalAssets/fonts */
+
+@font-face {
+  font-family: "AvenirNextRoundedStd-Reg";
+  src: url("/generalAssets/fonts/AvenirNextRoundedStd-Reg.woff2") format("woff2"),
+       url("/generalAssets/fonts/AvenirNextRoundedStd-Reg.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DINPro-Bold";
+  src: url("/generalAssets/fonts/DINPro Bold.woff2") format("woff2"),
+       url("/generalAssets/fonts/DINPro Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Broadway-Regular";
+  src: url("/generalAssets/fonts/Broadway Regular.woff2") format("woff2"),
+       url("/generalAssets/fonts/Broadway Regular.woff") format("woff");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "AvenirNextRoundedStd-Reg", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #f5f5f5;
+  background-color: #293993;
+  /* Desktop background */
+  background-image: url("../generalAssets/img/backgroundDesktop.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* Background para tablet */
+@media (max-width: 1024px) {
+  body {
+    background-image: url("../generalAssets/img/backgroundTablet.png");
+  }
+}
+
+/* Background para móvil */
+@media (max-width: 768px) {
+  body {
+    background-image: url("../generalAssets/img/backgroundMobile.png");
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(41, 57, 147, 0.8),
+    rgba(187, 41, 187, 0.75),
+    rgba(225, 0, 152, 0.75)
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.registration-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+}
+
+.registration-card {
+  background: rgba(6, 10, 43, 0.9);
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.registration-title {
+  font-family: "Broadway-Regular", system-ui, sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff8000, #e10098);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.registration-subtitle {
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  color: #f8f3ff;
+  opacity: 0.9;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffddff;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(9, 13, 56, 0.9);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+input:focus {
+  border-color: #ff8000;
+  box-shadow: 0 0 0 2px rgba(255, 128, 0, 0.45);
+  background: rgba(9, 13, 56, 1);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.1rem 0 0.7rem;
+  font-size: 0.9rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #e10098;
+}
+
+.checkbox-row label {
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  color: #fef4ff;
+}
+
+.team-options {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(14, 19, 68, 0.95);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+.team-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.team-btn {
+  flex: 1 1 150px;
+  padding: 0.55rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #ff8000;
+  background: transparent;
+  color: #ffdccb;
+  font-family: "DINPro-Bold", system-ui, sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.team-btn:hover {
+  background: rgba(255, 128, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 128, 0, 0.7);
+}
+
+.team-btn.active {
+  background: linear-gradient(120deg, #ff8000, #e10098);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(225, 0, 152, 0.6);
+}
+
+.team-fields {
+  display: none;
+  margin-top: 0.3rem;
+}
+
+.team-fields.active {
+  display: block;
+}
+
+.team-fields label {
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.06em;
+}
+
+.submit-row {
+  margin-top: 1.4rem;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  font-family: "DINPro-Bold", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  background-image: linear-gradient(120deg, #ff8000, #e10098, #bb29bb);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  filter: brightness(1.03);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.helper-text {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .registration-card {
+    padding: 1.5rem 1.3rem;
+  }
+
+  .registration-title {
+    font-size: 1.4rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  /* Ajuste específico para que los botones de team
+     no se salgan del ancho de la pantalla en móviles */
+  .team-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-btn {
+    flex: 0 0 auto;
+    width: 80%;
+    max-width: 240px;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    padding: 0.55rem 0.4rem;
+  }
+}

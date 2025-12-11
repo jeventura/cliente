@@ -3,82 +3,438 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RuPaul Trivia Quiz</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- FontAwesome para los íconos -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <title>Werk Room Quiz</title>
+
+  <style>
+    :root {
+      --pink: #E10098;   /* RGB(225,0,152) */
+      --orange: #FF8000; /* RGB(255,128,0) */
+      --purple: #BB29BB; /* RGB(187,41,187) */
+      --navy: #293993;   /* RGB(41,57,147) */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #ffffff;
+      background-color: var(--navy);
+      background-image: url("/generalAssets/img/backgroundDesktop.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: "AvenirNextRoundedStd-Reg", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      body {
+        background-image: url("/generalAssets/img/backgroundTablet.png");
+      }
+    }
+
+    /* Mobile (ojo al nombre del archivo tal como lo diste: backgorundMobile.png) */
+    @media (max-width: 600px) {
+      body {
+        background-image: url("/generalAssets/img/backgorundMobile.png");
+        padding: 1.5rem;
+      }
+
+      .quiz-card {
+        padding: 1.5rem;
+      }
+
+      .option-btn {
+        font-size: 0.95rem;
+        padding: 0.6rem 0.75rem;
+      }
+    }
+
+    .quiz-card {
+      width: 100%;
+      max-width: 650px;
+      background: rgba(0, 0, 0, 0.72);
+      border-radius: 24px;
+      padding: 2.25rem 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .quiz-title {
+      font-family: "Broadway Regular", "AvenirNextRoundedStd-Bold",
+        system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-align: center;
+      margin: 0 0 1.8rem;
+      font-size: 1.3rem;
+      color: #ffffff;
+      text-shadow: 0 0 14px rgba(0, 0, 0, 0.7);
+    }
+
+    .quiz-title span {
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .status-text {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 0.75rem;
+      font-family: "DIN Pro", "AvenirNextRoundedStd-Demi", system-ui, sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .question-text {
+      font-family: "AvenirNextRoundedStd-Demi", system-ui, sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-btn {
+      width: 100%;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      font-family: "AvenirNextRoundedStd-Reg", system-ui, sans-serif;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.12s ease,
+        border-color 0.12s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      border-color: var(--pink);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+      opacity: 0.9;
+    }
+
+    .option-btn.correct {
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      border-color: var(--orange);
+      box-shadow: 0 0 18px rgba(255, 128, 0, 0.7);
+    }
+
+    .option-btn.wrong {
+      background: rgba(187, 41, 187, 0.75);
+      border-color: var(--purple);
+      box-shadow: 0 0 16px rgba(187, 41, 187, 0.7);
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: none;
+      padding: 0.8rem 1.7rem;
+      font-family: "AvenirNextRoundedStd-Demi", system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+      transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        filter 0.12s ease;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.65);
+      filter: brightness(1.05);
+    }
+
+    .primary-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .accent-text {
+      font-family: "Chalet-NewYork1970", "HelveticaNeue-Condensed", system-ui,
+        sans-serif;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .result-title {
+      font-family: "Broadway Italic", "Broadway Regular",
+        "AvenirNextRoundedStd-Bold", system-ui, sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .result-title.win {
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+    }
+
+    .result-title.lose {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+    }
+
+    .result-detail {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-family: "AvenirNextRoundedStd-Reg", system-ui, sans-serif;
+      opacity: 0.9;
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Botón inicial -->
-  <div class="start_btn">
-    <button>Start Quiz</button>
-  </div>
+  <div class="quiz-card">
+    <h1 class="quiz-title">
+      <span>Werk Room</span> Quiz
+    </h1>
 
-  <!-- Info Box -->
-  <div class="info_box">
-    <div class="info-title">
-      <span>Some Rules of this Quiz</span>
+    <!-- Pantalla de inicio -->
+    <div id="start-screen" class="centered">
+      <p class="result-detail" style="margin-bottom: 1.75rem;">
+        Answer all three questions correctly to <strong>WIN 10 points</strong>.
+      </p>
+      <button id="start-btn" class="primary-btn">
+        Start Game
+      </button>
     </div>
-    <div class="info-list">
-      <div class="info">1. You will have only <span>15 seconds</span> for this question.</div>
-      <div class="info">2. Once you select your answer, it can't be undone.</div>
-      <div class="info">3. You can't select any option once time goes off.</div>
-      <div class="info">4. You can't exit from the Quiz while you're playing.</div>
-      <div class="info">5. You'll get points based on your correct answer.</div>
-    </div>
-    <div class="buttons">
-      <button class="quit">Exit Quiz</button>
-      <button class="restart">Continue</button>
-    </div>
-  </div>
 
-  <!-- Quiz Box -->
-  <div class="quiz_box">
-    <header>
-      <div class="title">RuPaul Trivia Quiz</div>
-      <div class="timer">
-        <div class="time_left_txt">Time Left</div>
-        <div class="timer_sec">15</div>
+    <!-- Pantalla de preguntas -->
+    <div id="quiz-screen" class="hidden">
+      <div class="status-text" id="status-text">
+        Question 1 of 3
       </div>
-      <div class="time_line"></div>
-    </header>
-
-    <section>
-      <div class="que_text">
-        <!-- La pregunta se inserta por JS -->
+      <div class="question-text" id="question-text">
+        <!-- Aquí va la pregunta -->
       </div>
-      <div class="option_list">
-        <!-- Opciones por JS -->
+      <div class="options" id="options-container">
+        <!-- Aquí van las opciones -->
       </div>
-    </section>
-
-    <footer>
-      <div class="total_que">
-        <!-- Contador de pregunta por JS -->
+      <div class="centered">
+        <span class="accent-text">Choose wisely…</span>
       </div>
-      <button class="next_btn">Next</button>
-    </footer>
-  </div>
-
-  <!-- Result Box -->
-  <div class="result_box">
-    <div class="icon">
-      <i class="fas fa-crown"></i>
     </div>
-    <div class="complete_text">You've completed the Quiz!</div>
-    <div class="score_text">
-      <!-- Resultado por JS -->
-    </div>
-    <div class="buttons">
-      <button class="restart">Replay Quiz</button>
-      <button class="quit">Quit Quiz</button>
+
+    <!-- Pantalla de resultado -->
+    <div id="result-screen" class="hidden centered">
+      <div id="result-title" class="result-title">
+        <!-- WIN o Game Over -->
+      </div>
+      <p id="result-detail" class="result-detail"></p>
+      <button id="close-btn" class="primary-btn">
+        Close
+      </button>
     </div>
   </div>
 
-  <!-- Preguntas -->
-  <script src="js/questions.js"></script>
-  <!-- Lógica del quiz -->
-  <script src="js/script.js"></script>
+  <script>
+    // Preguntas del juego
+    const questions = [
+      {
+        text: "What season introduced a WERK sign behind the doorway?",
+        options: ["5", "7", "9", "11"],
+        correctIndex: 1 // Season 7
+      },
+      {
+        text: "Who is the 100th queen to enter the Werk Room?",
+        options: [
+          "Bob the Drag Queen",
+          "Laila McQueen",
+          "Chi Chi DeVayne",
+          "Derrick Barry"
+        ],
+        correctIndex: 3 // Derrick Barry
+      },
+      {
+        text:
+          "Which queen’s entrance involved a reveal almost thwarted by a stuck zipper?",
+        options: ["Vivacious", "Jinkx", "Alaska", "Utica"],
+        correctIndex: 0 // Vivacious
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
+    let finalPoints = 0;
+
+    const startScreen = document.getElementById("start-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const resultScreen = document.getElementById("result-screen");
+
+    const statusText = document.getElementById("status-text");
+    const questionTextEl = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options-container");
+
+    const resultTitleEl = document.getElementById("result-title");
+    const resultDetailEl = document.getElementById("result-detail");
+
+    const startBtn = document.getElementById("start-btn");
+    const closeBtn = document.getElementById("close-btn");
+
+    startBtn.addEventListener("click", startGame);
+    closeBtn.addEventListener("click", () => {
+      sendScoreAndGoBack(finalPoints);
+    });
+
+    function startGame() {
+      currentQuestionIndex = 0;
+      correctAnswers = 0;
+      finalPoints = 0;
+
+      startScreen.classList.add("hidden");
+      resultScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestionIndex];
+      statusText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+      questionTextEl.textContent = q.text;
+
+      // Limpiar opciones
+      optionsContainer.innerHTML = "";
+
+      q.options.forEach((optionText, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = optionText;
+        btn.addEventListener("click", () => handleAnswer(index));
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selectedIndex) {
+      const q = questions[currentQuestionIndex];
+      const optionButtons = optionsContainer.querySelectorAll(".option-btn");
+
+      optionButtons.forEach((btn, index) => {
+        btn.disabled = true;
+
+        if (index === q.correctIndex) {
+          btn.classList.add("correct");
+        }
+
+        if (index === selectedIndex && selectedIndex !== q.correctIndex) {
+          btn.classList.add("wrong");
+        }
+      });
+
+      if (selectedIndex === q.correctIndex) {
+        correctAnswers++;
+      }
+
+      // Pasar a la siguiente pregunta o mostrar resultado
+      setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }, 900);
+    }
+
+    function showResult() {
+      quizScreen.classList.add("hidden");
+      resultScreen.classList.remove("hidden");
+
+      // 10 puntos solo si todas son correctas, 0 en caso contrario
+      if (correctAnswers === questions.length) {
+        finalPoints = 10;
+        resultTitleEl.textContent = "WIN!";
+        resultTitleEl.classList.remove("lose");
+        resultTitleEl.classList.add("win");
+        resultDetailEl.textContent = "you won 10 points";
+      } else {
+        finalPoints = 0;
+        resultTitleEl.textContent = "Game Over";
+        resultTitleEl.classList.remove("win");
+        resultTitleEl.classList.add("lose");
+        resultDetailEl.textContent = "you won 0 points in this case";
+      }
+    }
+
+    function sendScoreAndGoBack(points) {
+      // 1) Guardar en localStorage (para que la página anterior pueda leerlo si quiere)
+      try {
+        localStorage.setItem("werkRoomQuizPoints", String(points));
+      } catch (e) {
+        // ignorar errores de almacenamiento
+      }
+
+      // 2) Enviar mensaje al parent (útil si estás dentro de un iframe)
+      try {
+        window.parent.postMessage(
+          {
+            type: "GAME_RESULT",
+            gameId: "werkRoomQuiz",
+            points: points
+          },
+          "*"
+        );
+      } catch (e) {
+        // ignorar si no hay parent o no se puede postMessage
+      }
+
+      // 3) Volver a la página anterior
+      if (window.history.length > 1) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>

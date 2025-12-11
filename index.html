@@ -1,41 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RuPaul Word Search</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Registro RuPaul Experience</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
-  <div class="wrapper">
-    <header class="game-header">
-      <h1>RuPaul Word Search</h1>
-      <p>Find the hidden words in the grid: RUPAUL, WERK, HELLO</p>
-    </header>
+  <div class="overlay"></div>
 
-    <main class="game-layout">
-      <section class="grid-section">
-        <div id="word-grid" class="grid"></div>
-      </section>
+  <div class="registration-wrapper">
+    <div class="registration-card">
+      <h1 class="registration-title">Player Registration</h1>
+      <p class="registration-subtitle">
+        Before you can start the Werk Room scavenger hunt, we need to know your drag name!
+      </p>
 
-      <section class="sidebar">
-        <p class="timer-text">
-          Time Left: <span id="time-left">60</span> sec
-        </p>
-
-        <p class="status" id="status-text">
-          Click a letter to start, then click another letter in a straight line (horizontal, vertical or diagonal).
-        </p>
-
-        <div class="buttons-row">
-          <button id="exit-btn" class="exit-btn">Exit</button>
-          <button id="reset-btn" class="reset-btn">Reset Puzzle</button>
+      <form id="playerForm" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last name</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              placeholder="Last name"
+              required
+            />
+          </div>
         </div>
-      </section>
-    </main>
+
+        <div class="form-group">
+          <label for="dragname">Drag name</label>
+          <input
+            type="text"
+            id="dragname"
+            name="dragname"
+            placeholder="your drag name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="youremail@example.com"
+            required
+          />
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="playInTeam" name="playInTeam" />
+          <label for="playInTeam">
+            Here with some of your fellow queens? Perfect time to come up with a house name
+          </label>
+        </div>
+
+        <div id="teamOptions" class="team-options" style="display: none;">
+          <div class="team-buttons">
+            <button type="button" class="team-btn" id="createTeamBtn">
+              Create team
+            </button>
+            <button type="button" class="team-btn" id="joinTeamBtn">
+              Join a team
+            </button>
+          </div>
+
+          <div id="createTeamFields" class="team-fields">
+            <label for="teamNameCreate">Team name</label>
+            <input
+              type="text"
+              id="teamNameCreate"
+              name="teamNameCreate"
+              placeholder="Ej. House of Glitter"
+            />
+          </div>
+
+          <div id="joinTeamFields" class="team-fields">
+            <label for="teamNameJoin">Team name </label>
+            <input
+              type="text"
+              id="teamNameJoin"
+              name="teamNameJoin"
+              placeholder="Please write the team name you want to join"
+            />
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn">
+            Continue
+          </button>
+        </div>
+
+        <p class="helper-text">
+          You will be able to enter the challenges once you complete this registration.
+        </p>
+      </form>
+    </div>
   </div>
 
-  <script src="js/words.js"></script>
-  <script src="js/script.js"></script>
+  <!-- JS principal -->
+  <script type="module" src="js/registration.js"></script>
 </body>
 </html>
